@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/alertdialog_layout"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/information"
+        android:id="@+id/information"
+        android:layout_weight="0.04"
+        android:textStyle="bold|normal"
+        android:layout_marginTop="10dp"
+        android:textSize="15dp"
+        android:layout_marginLeft="20dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/black"
+        android:layout_marginTop="28dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:id="@+id/title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/edittext"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:id="@+id/edittext"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/information"
+        android:layout_alignEnd="@+id/information"
+        android:layout_below="@+id/information" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/variety"
+        android:id="@+id/variety"
+        android:layout_below="@+id/edittext"
+        android:layout_alignRight="@+id/title"
+        android:layout_alignEnd="@+id/title"
+        android:layout_marginTop="20dp" />
+
+    <Spinner
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner2"
+        android:layout_alignTop="@+id/variety"
+        android:layout_alignLeft="@+id/edittext"
+        android:layout_alignStart="@+id/edittext"
+        android:entries="@array/three_or_four"
+        android:prompt="@string/spinnerSample" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/player"
+        android:id="@+id/player"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/spinner2"
+        android:layout_alignLeft="@+id/title"
+        android:layout_alignStart="@+id/title"
+        android:layout_marginTop="69dp" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/listView"
+        android:layout_below="@+id/player"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/black"
+        android:layout_alignBottom="@+id/player"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <!--android:prompt="@string/spinnerSample"
+    android:entries="@array/Sample"-->
+
+
+</RelativeLayout>

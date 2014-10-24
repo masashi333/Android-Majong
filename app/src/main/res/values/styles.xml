@@ -1,0 +1,21 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/actionBar</item>
+
+    </style>
+    <style name="actionBar" parent="android:Widget.ActionBar">
+        <!-- タイトルバーの背景色 -->
+        <item name="android:background">@color/green</item>
+        <!-- タイトルバーの文字スタイル -->
+        <item name="android:titleTextStyle">@style/titleTextStyle</item>
+    </style>
+    <style name="titleTextStyle" parent="android:TextAppearance">
+        <!-- タイトルバーの文字色 -->
+        <item name="android:textColor">@color/white</item>
+        <!-- タイトルバーの文字スタイル -->
+        <item name="android:textStyle">italic</item>
+    </style>
+</resources>

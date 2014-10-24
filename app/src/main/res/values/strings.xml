@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">麻雀成績管理アプリ</string>
+    <string name="title_section1">成績表</string>
+    <string name="title_section2">雀士一覧</string>
+    <string name="title_section3">設定</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_new">New</string>
+    <string name="action_add_person">Add_Person</string>
+    <string name="information">情報</string>
+    <string name="title">タイトル:</string>
+    <string name="variety">種類:</string>
+    <string name="register_person">新規雀士の登録</string>
+    <string name="register_name">名前を入力してください</string>
+    <string name="player">雀士</string>
+
+
+
+
+
+    <string-array name="three_or_four">
+
+         <item>3人麻雀</item>
+
+         <item>4人麻雀</item>
+     </string-array>
+     <string name="spinnerSample">Spinner Sample</string>
+</resources>

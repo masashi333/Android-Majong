@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/action_add_person"
+        android:icon="@drawable/ic_action_add_person"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_add_person"/>
+
+    <!-- <item
+         android:id="@+id/action_favorite"
+         android:icon="@drawable/ic_action_favorite"
+         android:orderInCategory="101"
+         android:showAsAction="ifRoom"
+         android:title="@string/action_favorite"/>
+
+     <item
+         android:id="@+id/action_good"
+         android:icon="@drawable/ic_action_good"
+         android:orderInCategory="102"
+         android:showAsAction="ifRoom"
+         android:title="@string/action_good"/>-->
+
+</menu>
