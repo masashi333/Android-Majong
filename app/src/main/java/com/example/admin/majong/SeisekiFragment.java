@@ -4,8 +4,10 @@ package com.example.admin.majong;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -71,6 +73,7 @@ public class SeisekiFragment extends Fragment {
         if (getArguments() != null) {
             mResourceId = getArguments().getInt(ARG_PARAM_RESOURCE_ID);
         }
+
         setHasOptionsMenu(true); //付け忘れないように
     }
 
@@ -230,6 +233,15 @@ public class SeisekiFragment extends Fragment {
 
         ListView listView = (ListView) rootview.findViewById(R.id.listView);
         listView.setAdapter(customAdapater);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // インテントのインスタンス生成
+                Intent intent = new Intent(getActivity(), Majong_Second_Activity.class);
+                // 次画面のアクティビティ起動
+                startActivity(intent);
+            }
+        });
 
     }
     //Preferenceからデータを読み込んで、listviewにすべての成績表を表示させる
@@ -251,7 +263,15 @@ public class SeisekiFragment extends Fragment {
 
         ListView listView = (ListView) getActivity().findViewById(R.id.listView);
         listView.setAdapter(customAdapater);
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // インテントのインスタンス生成
+               Intent intent = new Intent(getActivity(), Majong_Second_Activity.class);
+               // 次画面のアクティビティ起動
+                startActivity(intent);
+            }
+        });
     }
 
 }

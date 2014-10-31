@@ -43,7 +43,7 @@ public class CustomAdapter_seiseki_table extends ArrayAdapter<CustomData> {
             textView = (TextView) convertView.findViewById(R.id.title);
             textView.setText(item.getTextData());
             //テーブルレイアウト作成する関数呼び出し
-            initTableLayout(convertView);
+            //initTableLayout(convertView);
         }
             return convertView;
 
@@ -54,20 +54,22 @@ public class CustomAdapter_seiseki_table extends ArrayAdapter<CustomData> {
 
         TableRow tableRow1 = new TableRow(getContext());
         tableLayout.addView(tableRow1);
-        tableRow1.addView(createButton("セル１－１"));
-        tableRow1.addView(createButton("セル１－２"));
+        tableRow1.addView(createText("セル１－１"));
+        tableRow1.addView(createText("セル１－２"));
 
         TableRow tableRow2 = new TableRow(getContext());
         tableLayout.addView(tableRow2);
-        tableRow2.addView(createButton("セル２－１"));
-        tableRow2.addView(createButton("セル２－２"));
+        tableRow2.addView(createText("セル２－１"));
+        tableRow2.addView(createText("セル２－２"));
 
     }
     //ボタンを作る
-    private Button createButton(String text) {
-        Button button = new Button(getContext());
-        button.setText(text);
-        return button;
+    private TextView createText(String text) {
+        TextView textView = new TextView(getContext());
+        textView.setText(text);
+        textView.setWidth(500);
+
+        return textView;
     }
 }
 

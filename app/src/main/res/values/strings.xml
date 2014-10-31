@@ -12,6 +12,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="action_new">New</string>
     <string name="action_add_person">Add_Person</string>
+    <string name="action_edit">Edit</string>
     <string name="information">情報</string>
     <string name="title">タイトル:</string>
     <string name="variety">種類:</string>
