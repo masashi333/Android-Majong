@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<TableRow
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:stretchColumns="*"
+    android:id="@+id/tablerow_member">
+
+    <TextView
+        android:id="@+id/rowtext1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:text="畠山"
+        android:layout_weight="1"
+        android:background="#003366"
+        android:textColor="@color/white"
+        android:layout_marginLeft="1dip"
+        >
+
+    </TextView>
+
+</TableRow>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/alertdialog_layout"
+    android:weightSum="1">
+
+
+    <TableLayout
+        android:id="@+id/tablelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/title"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:id="@+id/tablerow_member"
+
+            >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="1dip"
+                android:layout_weight="1"
+                android:background="#003366"
+                android:gravity="center"
+                android:text="野田"
+                android:textColor="#FFFFFF"></TextView>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="1dip"
+                android:layout_marginLeft="1dip"
+                android:layout_marginRight="1dip"
+                android:layout_weight="1"
+                android:background="#003366"
+                android:gravity="center"
+                android:text="赤木"
+                android:textColor="#FFFFFF"></TextView>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="1dip"
+                android:layout_weight="1"
+                android:background="#003366"
+                android:gravity="center"
+                android:text="田中"
+                android:textColor="#FFFFFF"></TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tablerow1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#000000"
+            android:stretchColumns="*"
+            android:clickable="true"
+            >
+
+
+            <EditText
+                android:id="@+id/column1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:digits="01234567890-"
+                android:layout_marginBottom="1dip"
+                android:layout_marginLeft="1dip"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="#000000"></EditText>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/column2"
+                android:digits="01234567890-"
+                android:layout_marginBottom="1dip"
+                android:layout_marginLeft="1dip"
+                android:layout_marginRight="1dip"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="#000000"></EditText>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/column3"
+                android:digits="01234567890-"
+                android:layout_marginBottom="1dip"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="0"
+                android:layout_marginRight="1dip"
+                android:textColor="#000000"></EditText>
+        </TableRow>
+
+    </TableLayout>
+</RelativeLayout>
