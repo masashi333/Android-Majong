@@ -75,62 +75,6 @@
                     android:textColor="#FFFFFF"></TextView>
             </TableRow>
 
-            <TableRow
-                android:id="@+id/tablerow1"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#000000"
-                android:stretchColumns="*"
-                android:clickable="true"
-                >
-
-                <TextView
-                    android:layout_width="15dp"
-                    android:layout_height="fill_parent"
-                    android:layout_marginLeft="1dip"
-                    android:layout_weight="0.1"
-                    android:background="#003366"
-                    android:text="1"
-                    android:textColor="@color/white">
-
-                </TextView>
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:id="@+id/rowtext2"
-                    android:layout_marginBottom="1dip"
-                    android:layout_marginLeft="1dip"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textColor="#000000"></TextView>
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:id="@+id/rowtext3"
-                    android:layout_marginBottom="1dip"
-                    android:layout_marginLeft="1dip"
-                    android:layout_marginRight="1dip"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textColor="#000000"></TextView>
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:id="@+id/rowtext4"
-                    android:layout_marginBottom="1dip"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textColor="#000000"></TextView>
-            </TableRow>
         </TableLayout>
     </LinearLayout>
 </ScrollView>

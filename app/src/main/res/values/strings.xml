@@ -20,15 +20,13 @@
     <string name="register_name">名前を入力してください</string>
     <string name="player">雀士</string>
 
-
-
-
-
     <string-array name="three_or_four">
+        <item>3人麻雀</item>
+        <item>4人麻雀</item>
+    </string-array>
 
-         <item>3人麻雀</item>
+    <string name="spinnerSample">Spinner Sample</string>
+    <string name="title_activity_majong__second__activity2">Majong_Second_Activity2</string>
+    <string name="hello_world">Hello world!</string>
 
-         <item>4人麻雀</item>
-     </string-array>
-     <string name="spinnerSample">Spinner Sample</string>
 </resources>
