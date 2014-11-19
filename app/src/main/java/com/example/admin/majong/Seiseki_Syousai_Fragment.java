@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,7 +25,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,10 +38,14 @@ public class Seiseki_Syousai_Fragment extends Fragment {
     static int column1_total;
     static int column2_total;
     static int column3_total;
+    static DBAdapter dbAdapter;
+    static List<Majong_seiseki> seisekiList = new ArrayList<Majong_seiseki>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        dbAdapter = new DBAdapter(getActivity());
+        loadSeiseki();
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -99,6 +106,12 @@ public class Seiseki_Syousai_Fragment extends Fragment {
                             if(syuusi!=0){
                                 Toast.makeText(getActivity(),invalid, Toast.LENGTH_LONG).show();
                             }else{
+                                dbAdapter.open();
+                                dbAdapter.saveSeiseki(row_number,1);
+                                dbAdapter.saveSeiseki(row_number,2);
+                                dbAdapter.saveSeiseki(row_number,3);
+                                dbAdapter.close();
+
                                 TextView textView1 = (TextView) tableRow.findViewById(R.id.rowtext2);
                                 TextView textView2 = (TextView) tableRow.findViewById(R.id.rowtext3);
                                 TextView textView3 = (TextView) tableRow.findViewById(R.id.rowtext4);
@@ -187,4 +200,30 @@ public class Seiseki_Syousai_Fragment extends Fragment {
         getActivity().getMenuInflater().inflate(R.menu.seiseki_syousai, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
+    protected void loadSeiseki(){
+        seisekiList.clear();
+
+        // Read
+        dbAdapter.open();
+        Cursor c = dbAdapter.getAllSeiseki();
+
+        //startManagingCursor(c);
+        if(c.moveToFirst()){
+            do {
+                Majong_seiseki seiseki = new Majong_seiseki(
+                        c.getInt(c.getColumnIndex(DBAdapter.COL_ID)),
+                        c.getString(c.getColumnIndex(DBAdapter.COL_GAMEID)),
+                        c.getString(c.getColumnIndex(DBAdapter.COL_MEMBERID))
+                        //c.getString(c.getColumnIndex(DBAdapter.COL_SEISEKI))
+                );
+                seisekiList.add(seiseki);
+            } while(c.moveToNext());
+        }
+
+        //stopManagingCursor(c);
+        dbAdapter.close();
+
+
+    }
+
 }
