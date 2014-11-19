@@ -4,33 +4,27 @@ package com.example.admin.majong;
  * Created by admin on 2014/11/18.
  */
 public class Majong_seiseki {
-    protected int id;
-    protected String gameid;
-    protected String memberid;
-    protected String seiseki;
+    protected int gameid;
+    protected int memberid;
+    protected int seiseki;
 
 
-    public Majong_seiseki(int id,String gameid,String memberid){
-        this.id = id;
+    public Majong_seiseki(int gameid, int memberid, int seiseki) {
         this.gameid = gameid;
         this.memberid = memberid;
         this.seiseki = seiseki;
     }
 
-    public String getGameid(){
+    public int getGameid() {
         return gameid;
     }
-    public String getMemberid(){
+
+    public int getMemberid() {
         return memberid;
     }
 
-    public String getSeiseki(){
+    public int getSeiseki() {
         return seiseki;
     }
-
-    public int getId(){
-        return id;
-    }
-
-
 }
+

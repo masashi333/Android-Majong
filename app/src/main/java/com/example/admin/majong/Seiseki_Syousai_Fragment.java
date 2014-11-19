@@ -107,9 +107,9 @@ public class Seiseki_Syousai_Fragment extends Fragment {
                                 Toast.makeText(getActivity(),invalid, Toast.LENGTH_LONG).show();
                             }else{
                                 dbAdapter.open();
-                                dbAdapter.saveSeiseki(row_number,1);
-                                dbAdapter.saveSeiseki(row_number,2);
-                                dbAdapter.saveSeiseki(row_number,3);
+                                dbAdapter.saveSeiseki(row_number,1,syuusi1);
+                                dbAdapter.saveSeiseki(row_number,2,syuusi2);
+                                dbAdapter.saveSeiseki(row_number,3,syuusi3);
                                 dbAdapter.close();
 
                                 TextView textView1 = (TextView) tableRow.findViewById(R.id.rowtext2);
@@ -211,10 +211,9 @@ public class Seiseki_Syousai_Fragment extends Fragment {
         if(c.moveToFirst()){
             do {
                 Majong_seiseki seiseki = new Majong_seiseki(
-                        c.getInt(c.getColumnIndex(DBAdapter.COL_ID)),
-                        c.getString(c.getColumnIndex(DBAdapter.COL_GAMEID)),
-                        c.getString(c.getColumnIndex(DBAdapter.COL_MEMBERID))
-                        //c.getString(c.getColumnIndex(DBAdapter.COL_SEISEKI))
+                        c.getInt(c.getColumnIndex(DBAdapter.COL_GAMEID)),
+                        c.getInt(c.getColumnIndex(DBAdapter.COL_MEMBERID)),
+                        c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))
                 );
                 seisekiList.add(seiseki);
             } while(c.moveToNext());

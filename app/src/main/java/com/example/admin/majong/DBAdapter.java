@@ -13,10 +13,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBAdapter {
 
-    static final String DATABASE_NAME = "note1.db";
+    static final String DATABASE_NAME = "note2.db";
     static final int DATABASE_VERSION = 1;
 
-    public static final String TABLE_NAME = "seiseki2";
+    public static final String TABLE_NAME = "seiseki";
     public static final String COL_ID = "_id";
     public static final String COL_MEMBERID = "memberid";
     public static final String COL_GAMEID = "gameid";
@@ -47,9 +47,9 @@ public class DBAdapter {
 
             db.execSQL(
                     "CREATE TABLE " + TABLE_NAME + " ("
-                            + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                            + COL_GAMEID + " TEXT NOT NULL,"
-                            + COL_MEMBERID + " TEXT NOT NULL)"
+                            + COL_GAMEID + " INTEGER default 0,"
+                            + COL_MEMBERID + " INTEGER default 0,"
+                            + COL_SEISEKI + " INTEGER default 0)"
                             );
         }
 
@@ -96,11 +96,11 @@ public class DBAdapter {
         return db.query(TABLE_NAME, null, null, null, null, null, null);
     }
 
-    public void saveSeiseki(int gameid,int memberid){
+    public void saveSeiseki(int gameid,int memberid,int seiseki){
         ContentValues values = new ContentValues();
-        values.put(COL_GAMEID,"game");
-        values.put(COL_MEMBERID,"member");
-        //values.put(COL_SEISEKI,"seiseki");
+        values.put(COL_GAMEID,gameid);
+        values.put(COL_MEMBERID,memberid);
+        values.put(COL_SEISEKI,seiseki);
         db.insertOrThrow(TABLE_NAME, null, values);
 
     }

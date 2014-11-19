@@ -75,10 +75,10 @@ public class Majong_Second_Activity extends Activity {
         if(c.moveToFirst()){
             do {
                 Majong_seiseki seiseki = new Majong_seiseki(
-                        c.getInt(c.getColumnIndex(DBAdapter.COL_ID)),
-                        c.getString(c.getColumnIndex(DBAdapter.COL_GAMEID)),
-                        c.getString(c.getColumnIndex(DBAdapter.COL_MEMBERID))
-                        //c.getString(c.getColumnIndex(DBAdapter.COL_SEISEKI))
+                        //c.getInt(c.getColumnIndex(DBAdapter.COL_ID)),
+                        c.getInt(c.getColumnIndex(DBAdapter.COL_GAMEID)),
+                        c.getInt(c.getColumnIndex(DBAdapter.COL_MEMBERID)),
+                        c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))
                 );
                 seisekiList.add(seiseki);
             } while(c.moveToNext());
