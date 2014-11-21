@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBAdapter {
 
-    static final String DATABASE_NAME = "note2.db";
+    static final String DATABASE_NAME = "note3.db";
     static final int DATABASE_VERSION = 1;
 
     public static final String TABLE_NAME = "seiseki";
@@ -51,6 +51,17 @@ public class DBAdapter {
                             + COL_MEMBERID + " INTEGER default 0,"
                             + COL_SEISEKI + " INTEGER default 0)"
                             );
+            for(int i=1;i<=20;i++){
+                for (int j = 1; j <= 3; j++) {
+                    ContentValues values = new ContentValues();
+                    values.put(COL_GAMEID, i);
+                    values.put(COL_MEMBERID, j);
+                    values.put(COL_SEISEKI, 0);
+                    db.insertOrThrow(TABLE_NAME, null, values);
+                }
+            }
+
+
         }
 
         @Override
@@ -88,8 +99,8 @@ public class DBAdapter {
         return db.delete(TABLE_NAME, null, null) > 0;
     }
 
-    public boolean deleteSeiseki(int id){
-        return db.delete(TABLE_NAME, COL_ID + "=" + id, null) > 0;
+    public boolean deleteSeiseki(int gameid){
+        return db.delete(TABLE_NAME, COL_GAMEID + "=" + gameid, null) > 0;
     }
 
     public Cursor getAllSeiseki(){

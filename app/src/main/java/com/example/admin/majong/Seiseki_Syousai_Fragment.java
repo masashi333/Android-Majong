@@ -26,6 +26,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -71,10 +72,23 @@ public class Seiseki_Syousai_Fragment extends Fragment {
         private void initTableLayout(final int row_number) {
             final TableLayout tableLayout = (TableLayout) getActivity().findViewById(R.id.tablelayout);
             final TableRow tableRow = (TableRow) getActivity().getLayoutInflater().inflate(R.layout.table_row, null);
-            //totalを計算する
             TextView textView1 = (TextView) tableRow.findViewById(R.id.rowtext2);
             TextView textView2 = (TextView) tableRow.findViewById(R.id.rowtext3);
             TextView textView3 = (TextView) tableRow.findViewById(R.id.rowtext4);
+            // rawQueryでSELECTを実行
+            //データベースからデータを取得し、表に反映
+            dbAdapter.open();
+            String sql = "select * from seiseki where gameid=" + row_number;
+            Cursor c = dbAdapter.db.rawQuery(sql, null);
+            c.moveToFirst();
+            System.out.println(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI)));
+            textView1.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))));
+            c.moveToNext();
+            textView2.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))));
+            c.moveToNext();
+            textView3.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))));
+            dbAdapter.close();
+            //totalを計算する
             int syuusi1 = Integer.parseInt(textView1.getText().toString());
             int syuusi2 = Integer.parseInt(textView2.getText().toString());
             int syuusi3 = Integer.parseInt(textView3.getText().toString());
@@ -92,40 +106,77 @@ public class Seiseki_Syousai_Fragment extends Fragment {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setTitle("結果を入力してください");
                     builder.setView(layout);
+                    EditText editText1 = (EditText) layout.findViewById(R.id.column1);
+                    EditText editText2 = (EditText) layout.findViewById(R.id.column2);
+                    EditText editText3 = (EditText) layout.findViewById(R.id.column3);
+                    // rawQueryでSELECTを実行
+                    //データベースからデータを取得し、成績詳細表に反映
+                    dbAdapter.open();
+                    String sql = "select * from seiseki where gameid=" + row_number;
+                    Cursor c = dbAdapter.db.rawQuery(sql, null);
+                    c.moveToFirst();
+                    System.out.println(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI)));
+                    editText1.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))));
+                    c.moveToNext();
+                    editText2.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))));
+                    c.moveToNext();
+                    editText3.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))));
+                    dbAdapter.close();
                     builder.setNegativeButton("保存", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // 保存 ボタンクリック処理
+                            TextView textView1 = (TextView) tableRow.findViewById(R.id.rowtext2);
+                            TextView textView2 = (TextView) tableRow.findViewById(R.id.rowtext3);
+                            TextView textView3 = (TextView) tableRow.findViewById(R.id.rowtext4);
                             EditText editText1 = (EditText) layout.findViewById(R.id.column1);
                             EditText editText2 = (EditText) layout.findViewById(R.id.column2);
                             EditText editText3 = (EditText) layout.findViewById(R.id.column3);
+
                             int syuusi1 = Integer.parseInt(editText1.getText().toString());
                             int syuusi2 = Integer.parseInt(editText2.getText().toString());
                             int syuusi3 = Integer.parseInt(editText3.getText().toString());
                             int syuusi = syuusi1 + syuusi2 + syuusi3;
+
+
                             String invalid = "合計が0になっていないので保存できません。";
                             if(syuusi!=0){
                                 Toast.makeText(getActivity(),invalid, Toast.LENGTH_LONG).show();
                             }else{
                                 dbAdapter.open();
+                                dbAdapter.deleteSeiseki(row_number);
                                 dbAdapter.saveSeiseki(row_number,1,syuusi1);
                                 dbAdapter.saveSeiseki(row_number,2,syuusi2);
                                 dbAdapter.saveSeiseki(row_number,3,syuusi3);
                                 dbAdapter.close();
+                               /* // rawQueryでSELECTを実行
+                                //データベースからデータを取得し、表に反映
+                                dbAdapter.open();
+                                String sql = "select * from seiseki where gameid=" + row_number;
+                                Cursor c = dbAdapter.db.rawQuery(sql, null);
+                                c.moveToFirst();
+                                System.out.println(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI)));
+                                textView1.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))));
+                                c.moveToNext();
+                                textView2.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))));
+                                c.moveToNext();
+                                textView3.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))));
+*/
+                                loadSeiseki();
 
-                                TextView textView1 = (TextView) tableRow.findViewById(R.id.rowtext2);
+                               /* TextView textView1 = (TextView) tableRow.findViewById(R.id.rowtext2);
                                 TextView textView2 = (TextView) tableRow.findViewById(R.id.rowtext3);
-                                TextView textView3 = (TextView) tableRow.findViewById(R.id.rowtext4);
+                                TextView textView3 = (TextView) tableRow.findViewById(R.id.rowtext4);*/
                                 textView1.setText(editText1.getText().toString());
                                 textView2.setText(editText2.getText().toString());
                                 textView3.setText(editText3.getText().toString());
                                 //データ管理できれば、totalを計算できるはず！！
-                            /*setContentView(R.layout.activity_second_majong);
-                            for (int i = 0; i < 20; i++) {
-                                int row_number = i + 1;
+                                getActivity().setContentView(R.layout.fragment_seiseki_syousai);
+                                for (int i = 0; i < 20; i++) {
+                                    int row_number = i + 1;
 
-                                initTableLayout(row_number);
-                            }
-                            totalTableLayout();*/
+                                    initTableLayout(row_number);
+                                }
+                                totalTableLayout();
 
 
 
@@ -190,6 +241,11 @@ public class Seiseki_Syousai_Fragment extends Fragment {
             textView1.setText(String.valueOf(column1_total));
             textView2.setText(String.valueOf(column2_total));
             textView3.setText(String.valueOf(column3_total));
+            //各列の合計を初期化
+            column1_total=0;
+            column2_total=0;
+            column3_total=0;
+
             tableLayout.addView(tableRow, new TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
 
@@ -216,6 +272,10 @@ public class Seiseki_Syousai_Fragment extends Fragment {
                         c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))
                 );
                 seisekiList.add(seiseki);
+                System.out.println(seiseki.getGameid());
+                System.out.println(seiseki.getMemberid());
+                System.out.println(seiseki.getSeiseki());
+
             } while(c.moveToNext());
         }
 
