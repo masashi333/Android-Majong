@@ -41,16 +41,21 @@ public class Seiseki_Syousai_Fragment extends Fragment {
     static int column3_total;
     static DBAdapter dbAdapter;
     static List<Majong_seiseki> seisekiList = new ArrayList<Majong_seiseki>();
+    static String title;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        dbAdapter = new DBAdapter(getActivity());
+        // ここで値を受け取ってる
+        title = getArguments().getString("title");
+        dbAdapter = new DBAdapter(getActivity(),title);
         loadSeiseki();
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_seiseki_syousai, container, false);
+        /*// ここで値を受け取ってる
+        title = getArguments().getString("title");*/
         return rootView;
     }
 
@@ -144,9 +149,9 @@ public class Seiseki_Syousai_Fragment extends Fragment {
                             }else{
                                 dbAdapter.open();
                                 dbAdapter.deleteSeiseki(row_number);
-                                dbAdapter.saveSeiseki(row_number,1,syuusi1);
-                                dbAdapter.saveSeiseki(row_number,2,syuusi2);
-                                dbAdapter.saveSeiseki(row_number,3,syuusi3);
+                                dbAdapter.saveSeiseki(title,row_number,1,syuusi1);
+                                dbAdapter.saveSeiseki(title,row_number,2,syuusi2);
+                                dbAdapter.saveSeiseki(title,row_number,3,syuusi3);
                                 dbAdapter.close();
                                /* // rawQueryでSELECTを実行
                                 //データベースからデータを取得し、表に反映
@@ -267,6 +272,7 @@ public class Seiseki_Syousai_Fragment extends Fragment {
         if(c.moveToFirst()){
             do {
                 Majong_seiseki seiseki = new Majong_seiseki(
+                        c.getString(c.getColumnIndex(DBAdapter.COL_TITLE)),
                         c.getInt(c.getColumnIndex(DBAdapter.COL_GAMEID)),
                         c.getInt(c.getColumnIndex(DBAdapter.COL_MEMBERID)),
                         c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))

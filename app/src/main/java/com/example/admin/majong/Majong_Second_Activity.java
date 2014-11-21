@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -35,9 +36,13 @@ public class Majong_Second_Activity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // インテントを取得
+        Intent intent = getIntent();
+        // インテントに保存されたデータを取得
+        String title = intent.getStringExtra("title");
 
         //データベースアダプターを作成
-        dbAdapter = new DBAdapter(Majong_Second_Activity.this);
+        dbAdapter = new DBAdapter(Majong_Second_Activity.this,title);
         listAdapter = new SeisekiListAdapter();
 
         loadSeiseki();
@@ -51,7 +56,7 @@ public class Majong_Second_Activity extends Activity {
         actionBar.addTab(actionBar.newTab()
                 .setText("成績詳細")
                 .setTabListener(new TabListener<Seiseki_Syousai_Fragment>(
-                        this, "tag1", Seiseki_Syousai_Fragment.class)));
+                        this, "tag1", Seiseki_Syousai_Fragment.class,title)));
     /*actionBar.addTab(actionBar.newTab()
             .setText("日付⇨日数")
     .setTabListener(new TabListener<SecondTabFragment>(
@@ -75,7 +80,7 @@ public class Majong_Second_Activity extends Activity {
         if(c.moveToFirst()){
             do {
                 Majong_seiseki seiseki = new Majong_seiseki(
-                        //c.getInt(c.getColumnIndex(DBAdapter.COL_ID)),
+                        c.getString(c.getColumnIndex(DBAdapter.COL_TITLE)),
                         c.getInt(c.getColumnIndex(DBAdapter.COL_GAMEID)),
                         c.getInt(c.getColumnIndex(DBAdapter.COL_MEMBERID)),
                         c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))

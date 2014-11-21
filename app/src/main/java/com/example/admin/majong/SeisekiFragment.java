@@ -44,6 +44,7 @@ public class SeisekiFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
     //private final ArrayAdapter<String> person_array = new ArrayAdapter<String>()
     private int mResourceId;
+    private static EditText title;
 
 
     /**
@@ -158,7 +159,7 @@ public class SeisekiFragment extends Fragment {
             builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // おーけー ボタンクリック処理
-                    EditText title = (EditText) layout.findViewById(R.id.edittext);
+                    title = (EditText) layout.findViewById(R.id.edittext);
                     SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
                     // Preferences に書き込むための Editor クラスを取得する
@@ -238,6 +239,7 @@ public class SeisekiFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // インテントのインスタンス生成
                 Intent intent = new Intent(getActivity(), Majong_Second_Activity.class);
+                intent.putExtra("title", title.getText().toString());
                 // 次画面のアクティビティ起動
                 startActivity(intent);
             }
@@ -268,6 +270,8 @@ public class SeisekiFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // インテントのインスタンス生成
                Intent intent = new Intent(getActivity(), Majong_Second_Activity.class);
+                //　インテントに値をセット
+               intent.putExtra("title", title.getText().toString());
                // 次画面のアクティビティ起動
                 startActivity(intent);
             }

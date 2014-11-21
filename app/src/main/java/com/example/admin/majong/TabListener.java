@@ -9,19 +9,22 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.os.Bundle;
 
 public class TabListener<T extends Fragment> implements ActionBar.TabListener {
     private Fragment mFragment;
     private final Activity mActivity;
     private final String mTag;
     private final Class<T> mClass;
+    private static String title;
 
     //コンストラクタ
-    public TabListener(Activity activity, String tag, Class<T> clz) {
+    public TabListener(Activity activity, String tag, Class<T> clz,String title) {
         mActivity = activity;
         mTag = tag;
         mClass = clz;
         mFragment = mActivity.getFragmentManager().findFragmentByTag(mTag);
+        this.title = title;
     }
 
     //タブが選択されたとき
@@ -30,7 +33,12 @@ public class TabListener<T extends Fragment> implements ActionBar.TabListener {
         if (mFragment == null) {
             mFragment = Fragment.instantiate(mActivity, mClass.getName());
             FragmentManager fm = mActivity.getFragmentManager();
+            Bundle bundle = new Bundle();
+            bundle.putString("title",title);
+            // フラグメントに渡す値をセット
+            mFragment.setArguments(bundle);
             fm.beginTransaction().add(R.id.container, mFragment, mTag).commit();
+
         } else {
             if (mFragment.isDetached()) {
                 // isDetached(): Return true if the fragment has been explicitly detached from the UI.
