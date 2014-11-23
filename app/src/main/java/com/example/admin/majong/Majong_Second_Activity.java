@@ -80,7 +80,6 @@ public class Majong_Second_Activity extends Activity {
         if(c.moveToFirst()){
             do {
                 Majong_seiseki seiseki = new Majong_seiseki(
-                        c.getString(c.getColumnIndex(DBAdapter.COL_TITLE)),
                         c.getInt(c.getColumnIndex(DBAdapter.COL_GAMEID)),
                         c.getInt(c.getColumnIndex(DBAdapter.COL_MEMBERID)),
                         c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))

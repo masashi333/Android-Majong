@@ -49,7 +49,7 @@ public class Seiseki_Syousai_Fragment extends Fragment {
         // ここで値を受け取ってる
         title = getArguments().getString("title");
         dbAdapter = new DBAdapter(getActivity(),title);
-        loadSeiseki();
+        //loadSeiseki();
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -83,7 +83,7 @@ public class Seiseki_Syousai_Fragment extends Fragment {
             // rawQueryでSELECTを実行
             //データベースからデータを取得し、表に反映
             dbAdapter.open();
-            String sql = "select * from seiseki where gameid=" + row_number;
+            String sql = "select * from seiseki" +title+ " where gameid=" + row_number;
             Cursor c = dbAdapter.db.rawQuery(sql, null);
             c.moveToFirst();
             System.out.println(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI)));
@@ -117,7 +117,7 @@ public class Seiseki_Syousai_Fragment extends Fragment {
                     // rawQueryでSELECTを実行
                     //データベースからデータを取得し、成績詳細表に反映
                     dbAdapter.open();
-                    String sql = "select * from seiseki where gameid=" + row_number;
+                    String sql = "select * from seiseki" +title+  " where gameid=" + row_number;
                     Cursor c = dbAdapter.db.rawQuery(sql, null);
                     c.moveToFirst();
                     System.out.println(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI)));
@@ -149,9 +149,9 @@ public class Seiseki_Syousai_Fragment extends Fragment {
                             }else{
                                 dbAdapter.open();
                                 dbAdapter.deleteSeiseki(row_number);
-                                dbAdapter.saveSeiseki(title,row_number,1,syuusi1);
-                                dbAdapter.saveSeiseki(title,row_number,2,syuusi2);
-                                dbAdapter.saveSeiseki(title,row_number,3,syuusi3);
+                                dbAdapter.saveSeiseki(row_number,1,syuusi1);
+                                dbAdapter.saveSeiseki(row_number,2,syuusi2);
+                                dbAdapter.saveSeiseki(row_number,3,syuusi3);
                                 dbAdapter.close();
                                /* // rawQueryでSELECTを実行
                                 //データベースからデータを取得し、表に反映
@@ -272,7 +272,6 @@ public class Seiseki_Syousai_Fragment extends Fragment {
         if(c.moveToFirst()){
             do {
                 Majong_seiseki seiseki = new Majong_seiseki(
-                        c.getString(c.getColumnIndex(DBAdapter.COL_TITLE)),
                         c.getInt(c.getColumnIndex(DBAdapter.COL_GAMEID)),
                         c.getInt(c.getColumnIndex(DBAdapter.COL_MEMBERID)),
                         c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))

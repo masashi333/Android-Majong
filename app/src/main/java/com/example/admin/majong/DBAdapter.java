@@ -13,12 +13,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBAdapter {
 
-    static final String DATABASE_NAME = "note4.db";
+    static final String DATABASE_NAME = "note7.db";
     static final int DATABASE_VERSION = 1;
 
-    public static final String TABLE_NAME = "seiseki";
+    public static String TABLE_NAME;
     public static final String COL_ID = "_id";
-    public static final String COL_TITLE = "title";
     public static final String COL_MEMBERID = "memberid";
     public static final String COL_GAMEID = "gameid";
     public static final String COL_SEISEKI = "seiseki";
@@ -32,6 +31,7 @@ public class DBAdapter {
     public DBAdapter(Context context,String title){
         this.context = context;
         this.title = title;
+        TABLE_NAME = "seiseki" +title;
         dbHelper = new DatabaseHelper(this.context);
     }
 
@@ -50,7 +50,6 @@ public class DBAdapter {
 
             db.execSQL(
                     "CREATE TABLE " + TABLE_NAME + " ("
-                            + COL_TITLE + " TEXT NOT NULL,"
                             + COL_GAMEID + " INTEGER default 0,"
                             + COL_MEMBERID + " INTEGER default 0,"
                             + COL_SEISEKI + " INTEGER default 0)"
@@ -58,7 +57,6 @@ public class DBAdapter {
             for(int i=1;i<=20;i++){
                 for (int j = 1; j <= 3; j++) {
                     ContentValues values = new ContentValues();
-                    values.put(COL_TITLE,title);
                     values.put(COL_GAMEID, i);
                     values.put(COL_MEMBERID, j);
                     values.put(COL_SEISEKI, 0);
@@ -112,9 +110,8 @@ public class DBAdapter {
         return db.query(TABLE_NAME, null, null, null, null, null, null);
     }
 
-    public void saveSeiseki(String title, int gameid,int memberid,int seiseki){
+    public void saveSeiseki(int gameid,int memberid,int seiseki){
         ContentValues values = new ContentValues();
-        values.put(COL_TITLE,title);
         values.put(COL_GAMEID,gameid);
         values.put(COL_MEMBERID,memberid);
         values.put(COL_SEISEKI,seiseki);

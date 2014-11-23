@@ -7,17 +7,12 @@ public class Majong_seiseki {
     protected int gameid;
     protected int memberid;
     protected int seiseki;
-    protected String title;
 
 
-    public Majong_seiseki(String title,int gameid, int memberid, int seiseki) {
-        this.title = title;
+    public Majong_seiseki(int gameid, int memberid, int seiseki) {
         this.gameid = gameid;
         this.memberid = memberid;
         this.seiseki = seiseki;
-    }
-    public String getTitle() {
-        return title;
     }
 
     public int getGameid() {

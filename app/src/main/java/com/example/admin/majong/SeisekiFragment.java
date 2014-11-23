@@ -27,6 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -237,6 +238,7 @@ public class SeisekiFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView title = (TextView)view.findViewById(R.id.title);
                 // インテントのインスタンス生成
                 Intent intent = new Intent(getActivity(), Majong_Second_Activity.class);
                 intent.putExtra("title", title.getText().toString());
