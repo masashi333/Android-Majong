@@ -46,16 +46,17 @@ public class Seiseki_Syousai_Fragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        // ここで値を受け取ってる
+        /*// ここで値を受け取ってる
         title = getArguments().getString("title");
-        dbAdapter = new DBAdapter(getActivity(),title);
+        dbAdapter = new DBAdapter(getActivity(),title);*/
         //loadSeiseki();
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_seiseki_syousai, container, false);
-        /*// ここで値を受け取ってる
-        title = getArguments().getString("title");*/
+        // ここで値を受け取ってる
+        title = getArguments().getString("title");
+        dbAdapter = new DBAdapter(getActivity(),title);
         return rootView;
     }
 
