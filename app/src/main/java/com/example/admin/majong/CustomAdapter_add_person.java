@@ -41,6 +41,7 @@ public class CustomAdapter_add_person extends ArrayAdapter<CustomData> {
             textView = (TextView) convertView.findViewById(R.id.name);
             textView.setText(item.getTextData());
 
+
         }
         return convertView;
     }

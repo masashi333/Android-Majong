@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.preference.PreferenceManager;
@@ -279,6 +280,9 @@ public class SeisekiFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
     }
+
+
 
 }

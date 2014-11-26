@@ -1,6 +1,7 @@
 package com.example.admin.majong;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,13 +43,14 @@ public class CustomAdapter_seiseki_table extends ArrayAdapter<CustomData> {
             TextView textView;
             textView = (TextView) convertView.findViewById(R.id.title);
             textView.setText(item.getTextData());
+            total_display(convertView,item);
             //テーブルレイアウト作成する関数呼び出し
             //initTableLayout(convertView);
         }
             return convertView;
 
     }
-    //テーブルレイアウトを作成する
+    /*//テーブルレイアウトを作成する
     private void initTableLayout(View convertview) {
         TableLayout tableLayout = (TableLayout) convertview.findViewById(R.id.tablelayout);
 
@@ -70,6 +72,26 @@ public class CustomAdapter_seiseki_table extends ArrayAdapter<CustomData> {
         textView.setWidth(500);
 
         return textView;
+    }*/
+    //トータルを表に表示させる
+    public void total_display(View convertview, CustomData item){
+        DBAdapter dbAdapter = new DBAdapter(getContext(),item.getTextData());
+        //データベースからデータを取得し、表に反映
+        dbAdapter.open();
+        String sql = "select * from seiseki where gameid=" + 21;
+        Cursor c = dbAdapter.db.rawQuery(sql, null);
+        TextView textView1 = (TextView) convertview.findViewById(R.id.total_score1);
+        TextView textView2 = (TextView) convertview.findViewById(R.id.total_score2);
+        TextView textView3 = (TextView) convertview.findViewById(R.id.total_score3);
+        c.moveToFirst();
+        System.out.println(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI)));
+        textView1.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))));
+        c.moveToNext();
+        textView2.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))));
+        c.moveToNext();
+        textView3.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))));
+        dbAdapter.close();
+
     }
 }
 

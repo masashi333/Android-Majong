@@ -84,7 +84,7 @@ public class Seiseki_Syousai_Fragment extends Fragment {
             // rawQueryでSELECTを実行
             //データベースからデータを取得し、表に反映
             dbAdapter.open();
-            String sql = "select * from seiseki" +title+ " where gameid=" + row_number;
+            String sql = "select * from seiseki where gameid=" + row_number;
             Cursor c = dbAdapter.db.rawQuery(sql, null);
             c.moveToFirst();
             System.out.println(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI)));
@@ -118,7 +118,7 @@ public class Seiseki_Syousai_Fragment extends Fragment {
                     // rawQueryでSELECTを実行
                     //データベースからデータを取得し、成績詳細表に反映
                     dbAdapter.open();
-                    String sql = "select * from seiseki" +title+  " where gameid=" + row_number;
+                    String sql = "select * from seiseki where gameid=" + row_number;
                     Cursor c = dbAdapter.db.rawQuery(sql, null);
                     c.moveToFirst();
                     System.out.println(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI)));
@@ -244,6 +244,12 @@ public class Seiseki_Syousai_Fragment extends Fragment {
             TextView textView1 = (TextView) tableRow.findViewById(R.id.rowtext2);
             TextView textView2 = (TextView) tableRow.findViewById(R.id.rowtext3);
             TextView textView3 = (TextView) tableRow.findViewById(R.id.rowtext4);
+            dbAdapter.open();
+            dbAdapter.deleteSeiseki(21);
+            dbAdapter.saveSeiseki(21,1,column1_total);
+            dbAdapter.saveSeiseki(21,2,column2_total);
+            dbAdapter.saveSeiseki(21,3,column3_total);
+            dbAdapter.close();
             textView1.setText(String.valueOf(column1_total));
             textView2.setText(String.valueOf(column2_total));
             textView3.setText(String.valueOf(column3_total));

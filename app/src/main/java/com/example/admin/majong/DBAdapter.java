@@ -13,10 +13,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBAdapter {
 
-    static final String DATABASE_NAME = "note7.db";
+    static String DATABASE_NAME = "seiseki.db";
     static final int DATABASE_VERSION = 1;
 
-    public static String TABLE_NAME;
+    public static String TABLE_NAME="seiseki";
     public static final String COL_ID = "_id";
     public static final String COL_MEMBERID = "memberid";
     public static final String COL_GAMEID = "gameid";
@@ -31,7 +31,7 @@ public class DBAdapter {
     public DBAdapter(Context context,String title){
         this.context = context;
         this.title = title;
-        TABLE_NAME = "seiseki" +title;
+        DATABASE_NAME = "seiseki" +title;
         dbHelper = new DatabaseHelper(this.context);
     }
 
