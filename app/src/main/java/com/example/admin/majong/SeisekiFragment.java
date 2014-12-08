@@ -1,7 +1,6 @@
 package com.example.admin.majong;
 
 
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
@@ -39,14 +38,12 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  * Use the {@link SeisekiFragment#newInstance} factory method to
  * create an instance of this fragment.
- *
  */
 public class SeisekiFragment extends Fragment {
     private static final String ARG_PARAM_RESOURCE_ID = "resource_id";
     private static final String ARG_SECTION_NUMBER = "section_number";
     //private final ArrayAdapter<String> person_array = new ArrayAdapter<String>()
     private int mResourceId;
-
 
 
     /**
@@ -66,6 +63,7 @@ public class SeisekiFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     public SeisekiFragment() {
         // Required empty public constructor
     }
@@ -86,9 +84,10 @@ public class SeisekiFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // If the drawer is open, show the global app actions in the action bar. See also
         // showGlobalContextActionBar, which controls the top-left area of the action bar.
-        inflater.inflate(R.menu.seiseki_table,menu);
+        inflater.inflate(R.menu.seiseki_table, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -97,8 +96,8 @@ public class SeisekiFragment extends Fragment {
         int id = item.getItemId();
         if (id == R.id.action_add) {
             // カスタムビューを設定
-            LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            final View layout = inflater.inflate(R.layout.new_seiseki,(ViewGroup)getActivity().findViewById(R.id.alertdialog_layout));
+            LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            final View layout = inflater.inflate(R.layout.new_seiseki, (ViewGroup) getActivity().findViewById(R.id.alertdialog_layout));
 
             // アラーとダイアログ を生成
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -123,13 +122,14 @@ public class SeisekiFragment extends Fragment {
                     String item = (String) spinner.getSelectedItem();
                     Toast.makeText(getActivity(), item, Toast.LENGTH_SHORT).show();
                 }
+
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
                 }
             });
 
             //雀士の一覧を配列に入れる
-             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
             for (int i = 0; i < 50; i++) {
@@ -147,7 +147,7 @@ public class SeisekiFragment extends Fragment {
             // リストビューのデータの作成
 
             List<CustomData> objects = new ArrayList<CustomData>();
-            for(int i=0; i< 3;i++){
+            for (int i = 0; i < 3; i++) {
                 CustomData item_i = new CustomData();
                 item_i.setAdapter(adapter);
                 objects.add(item_i);
@@ -155,13 +155,14 @@ public class SeisekiFragment extends Fragment {
 
             CustomAdapter_seiseki_information customAdapater = new CustomAdapter_seiseki_information(getActivity(), 0, objects);
 
-            ListView listView = (ListView)layout.findViewById(R.id.listView);
+            ListView listView = (ListView) layout.findViewById(R.id.listView);
             listView.setAdapter(customAdapater);
 
             builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // おーけー ボタンクリック処理
                     EditText title = (EditText) layout.findViewById(R.id.edittext);
+                    
                     SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
                     // Preferences に書き込むための Editor クラスを取得する
@@ -183,7 +184,7 @@ public class SeisekiFragment extends Fragment {
                 }
             });
 
-                builder.setPositiveButton("キャンセル", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("キャンセル", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // きゃんせる ボタンクリック処理
                 }
@@ -198,24 +199,30 @@ public class SeisekiFragment extends Fragment {
 
     //フラグメントがActivityに追加される時点で呼ばれるコールバックメソッド
     @Override
-    public void onAttach(Activity activity){
+    public void onAttach(Activity activity) {
         super.onAttach(activity);
-        ((Majong_Activity)activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
+        ((Majong_Activity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
     }
-
+    //戻るボタンを押した時に成績合計を更新
+    @Override
+    public void onStart() {
+        super.onStart();
+        refreshView();
+    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_seiseki,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_seiseki, container, false);
         refreshView(rootView);
 
         //ImageView imageView = (ImageView)rootView.findViewById(R.id.image_view);
         //imageView.setImageResource(mResourceId);
         return rootView;
     }
+
 
     //Preferenceからデータを読み込んで、listviewにすべての成績表を表示させる
     private void refreshView(View rootview) {
@@ -239,7 +246,7 @@ public class SeisekiFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView title = (TextView)view.findViewById(R.id.title);
+                TextView title = (TextView) view.findViewById(R.id.title);
                 // インテントのインスタンス生成
                 Intent intent = new Intent(getActivity(), Majong_Second_Activity.class);
                 intent.putExtra("title", title.getText().toString());
@@ -249,6 +256,7 @@ public class SeisekiFragment extends Fragment {
         });
 
     }
+
     //Preferenceからデータを読み込んで、listviewにすべての成績表を表示させる
     private void refreshView() {
         // アプリ標準の Preferences を取得する
@@ -271,18 +279,17 @@ public class SeisekiFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView title = (TextView)view.findViewById(R.id.title);
+                TextView title = (TextView) view.findViewById(R.id.title);
                 // インテントのインスタンス生成
-               Intent intent = new Intent(getActivity(), Majong_Second_Activity.class);
+                Intent intent = new Intent(getActivity(), Majong_Second_Activity.class);
                 //　インテントに値をセット
-               intent.putExtra("title", title.getText().toString());
-               // 次画面のアクティビティ起動
+                intent.putExtra("title", title.getText().toString());
+                // 次画面のアクティビティ起動
                 startActivity(intent);
             }
         });
 
     }
-
 
 
 }

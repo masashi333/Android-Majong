@@ -3,7 +3,6 @@ package com.example.admin.majong;
 /**
  * Created by admin on 2014/11/18.
  */
-import java.util.Date;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,7 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DBAdapter {
+public class DBAdapter_Seiseki {
 
     static String DATABASE_NAME = "seiseki.db";
     static final int DATABASE_VERSION = 1;
@@ -28,7 +27,7 @@ public class DBAdapter {
     protected SQLiteDatabase db;
     protected static String title;
 
-    public DBAdapter(Context context,String title){
+    public DBAdapter_Seiseki(Context context, String title){
         this.context = context;
         this.title = title;
         DATABASE_NAME = "seiseki" +title;
@@ -54,7 +53,7 @@ public class DBAdapter {
                             + COL_MEMBERID + " INTEGER default 0,"
                             + COL_SEISEKI + " INTEGER default 0)"
                             );
-            for(int i=1;i<=20;i++){
+            for(int i=1;i<=21;i++){
                 for (int j = 1; j <= 3; j++) {
                     ContentValues values = new ContentValues();
                     values.put(COL_GAMEID, i);
@@ -82,7 +81,7 @@ public class DBAdapter {
     // Adapter Methods
     //
 
-    public DBAdapter open() {
+    public DBAdapter_Seiseki open() {
         db = dbHelper.getWritableDatabase();
         return this;
     }

@@ -6,9 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.util.List;
@@ -30,8 +27,8 @@ public class CustomAdapter_seiseki_table extends ArrayAdapter<CustomData> {
         // 特定の行(position)のデータを得る
         CustomData item = (CustomData) getItem(position);
 
-        // convertViewは使い回しされている可能性があるのでnullの時だけ新しく作る
-        if (null == convertView) {
+       /* // convertViewは使い回しされている可能性があるのでnullの時だけ新しく作る
+        if (null == convertView) {*/
             convertView = layoutInflater_.inflate(R.layout.custom_listview3, null);
 
 
@@ -46,7 +43,7 @@ public class CustomAdapter_seiseki_table extends ArrayAdapter<CustomData> {
             total_display(convertView,item);
             //テーブルレイアウト作成する関数呼び出し
             //initTableLayout(convertView);
-        }
+       /* }*/
             return convertView;
 
     }
@@ -75,22 +72,22 @@ public class CustomAdapter_seiseki_table extends ArrayAdapter<CustomData> {
     }*/
     //トータルを表に表示させる
     public void total_display(View convertview, CustomData item){
-        DBAdapter dbAdapter = new DBAdapter(getContext(),item.getTextData());
+        DBAdapter_Seiseki dbAdapterSeiseki = new DBAdapter_Seiseki(getContext(),item.getTextData());
         //データベースからデータを取得し、表に反映
-        dbAdapter.open();
+        dbAdapterSeiseki.open();
         String sql = "select * from seiseki where gameid=" + 21;
-        Cursor c = dbAdapter.db.rawQuery(sql, null);
+        Cursor c = dbAdapterSeiseki.db.rawQuery(sql, null);
         TextView textView1 = (TextView) convertview.findViewById(R.id.total_score1);
         TextView textView2 = (TextView) convertview.findViewById(R.id.total_score2);
         TextView textView3 = (TextView) convertview.findViewById(R.id.total_score3);
         c.moveToFirst();
-        System.out.println(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI)));
-        textView1.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))));
+        System.out.println(c.getInt(c.getColumnIndex(DBAdapter_Seiseki.COL_SEISEKI)));
+        textView1.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter_Seiseki.COL_SEISEKI))));
         c.moveToNext();
-        textView2.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))));
+        textView2.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter_Seiseki.COL_SEISEKI))));
         c.moveToNext();
-        textView3.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))));
-        dbAdapter.close();
+        textView3.setText(String.valueOf(c.getInt(c.getColumnIndex(DBAdapter_Seiseki.COL_SEISEKI))));
+        dbAdapterSeiseki.close();
 
     }
 }

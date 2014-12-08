@@ -2,23 +2,15 @@ package com.example.admin.majong;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +21,7 @@ import java.util.List;
 public class Majong_Second_Activity extends Activity {
 
     static final String TAG = "SQlite";
-    static DBAdapter dbAdapter;
+    static DBAdapter_Seiseki dbAdapterSeiseki;
     static SeisekiListAdapter listAdapter;
     static List<Majong_seiseki> seisekiList = new ArrayList<Majong_seiseki>();
 
@@ -42,7 +34,7 @@ public class Majong_Second_Activity extends Activity {
         String title = intent.getStringExtra("title");
 
         //データベースアダプターを作成
-        dbAdapter = new DBAdapter(Majong_Second_Activity.this,title);
+        dbAdapterSeiseki = new DBAdapter_Seiseki(Majong_Second_Activity.this,title);
         listAdapter = new SeisekiListAdapter();
 
         loadSeiseki();
@@ -72,24 +64,24 @@ public class Majong_Second_Activity extends Activity {
         seisekiList.clear();
 
         // Read
-        dbAdapter.open();
-        Cursor c = dbAdapter.getAllSeiseki();
+        dbAdapterSeiseki.open();
+        Cursor c = dbAdapterSeiseki.getAllSeiseki();
 
         startManagingCursor(c);
 
         if(c.moveToFirst()){
             do {
                 Majong_seiseki seiseki = new Majong_seiseki(
-                        c.getInt(c.getColumnIndex(DBAdapter.COL_GAMEID)),
-                        c.getInt(c.getColumnIndex(DBAdapter.COL_MEMBERID)),
-                        c.getInt(c.getColumnIndex(DBAdapter.COL_SEISEKI))
+                        c.getInt(c.getColumnIndex(DBAdapter_Seiseki.COL_GAMEID)),
+                        c.getInt(c.getColumnIndex(DBAdapter_Seiseki.COL_MEMBERID)),
+                        c.getInt(c.getColumnIndex(DBAdapter_Seiseki.COL_SEISEKI))
                 );
                 seisekiList.add(seiseki);
             } while(c.moveToNext());
         }
 
         stopManagingCursor(c);
-        dbAdapter.close();
+        dbAdapterSeiseki.close();
 
         listAdapter.notifyDataSetChanged();
     }
