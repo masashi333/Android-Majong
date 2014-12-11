@@ -153,16 +153,23 @@ public class SeisekiFragment extends Fragment {
                 objects.add(item_i);
             }
 
-            CustomAdapter_seiseki_information customAdapater = new CustomAdapter_seiseki_information(getActivity(), 0, objects);
-
-            ListView listView = (ListView) layout.findViewById(R.id.listView);
+            final CustomAdapter_seiseki_information customAdapater = new CustomAdapter_seiseki_information(getActivity(), 0, objects);
+            final ListView listView = (ListView) layout.findViewById(R.id.listView);
             listView.setAdapter(customAdapater);
 
             builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // おーけー ボタンクリック処理
                     EditText title = (EditText) layout.findViewById(R.id.edittext);
-                    
+                    Spinner spinner1 = (Spinner) listView.getChildAt(0).findViewById(R.id.spinner);
+                    Spinner spinner2 = (Spinner) listView.getChildAt(1).findViewById(R.id.spinner);
+                    Spinner spinner3 = (Spinner) listView.getChildAt(2).findViewById(R.id.spinner);
+                    System.out.println("スピナーの選択された名前：" + spinner1.getSelectedItem());
+                    System.out.println("スピナーの選択された名前：" + spinner2.getSelectedItem());
+                    System.out.println("スピナーの選択された名前：" + spinner3.getSelectedItem());
+
+
+
                     SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
                     // Preferences に書き込むための Editor クラスを取得する
