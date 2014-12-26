@@ -17,7 +17,7 @@ public class DBAdapter_Seiseki {
 
     public static String TABLE_NAME="seiseki";
     public static final String COL_ID = "_id";
-    public static final String COL_MEMBERID = "memberid";
+    public static final String COL_MEMBER = "member";
     public static final String COL_GAMEID = "gameid";
     public static final String COL_SEISEKI = "seiseki";
 
@@ -26,7 +26,18 @@ public class DBAdapter_Seiseki {
     protected DatabaseHelper dbHelper;
     protected SQLiteDatabase db;
     protected static String title;
+    static String name[];
 
+    public DBAdapter_Seiseki(Context context, String title,String name[]){
+        this.context = context;
+        this.title = title;
+        DATABASE_NAME = "seiseki" +title;
+        this.name = name;
+        for(int i=0;i<=2;i++) {
+            System.out.println("メンバー一覧：" + name[i]);
+        }
+        dbHelper = new DatabaseHelper(this.context);
+    }
     public DBAdapter_Seiseki(Context context, String title){
         this.context = context;
         this.title = title;
@@ -50,14 +61,14 @@ public class DBAdapter_Seiseki {
             db.execSQL(
                     "CREATE TABLE " + TABLE_NAME + " ("
                             + COL_GAMEID + " INTEGER default 0,"
-                            + COL_MEMBERID + " INTEGER default 0,"
+                            + COL_MEMBER + " TEXT,"
                             + COL_SEISEKI + " INTEGER default 0)"
                             );
-            for(int i=1;i<=21;i++){
-                for (int j = 1; j <= 3; j++) {
+            for(int i=1;i<=22;i++){
+                for (int j = 0; j <= 2; j++) {
                     ContentValues values = new ContentValues();
                     values.put(COL_GAMEID, i);
-                    values.put(COL_MEMBERID, j);
+                    values.put(COL_MEMBER, name[j]);
                     values.put(COL_SEISEKI, 0);
                     db.insertOrThrow(TABLE_NAME, null, values);
                 }
@@ -109,12 +120,15 @@ public class DBAdapter_Seiseki {
         return db.query(TABLE_NAME, null, null, null, null, null, null);
     }
 
-    public void saveSeiseki(int gameid,int memberid,int seiseki){
+    public void saveSeiseki(int gameid,String member,int seiseki){
         ContentValues values = new ContentValues();
         values.put(COL_GAMEID,gameid);
-        values.put(COL_MEMBERID,memberid);
+        values.put(COL_MEMBER,member);
         values.put(COL_SEISEKI,seiseki);
         db.insertOrThrow(TABLE_NAME, null, values);
 
+    }
+    public String[] getMemberlist(){
+        return name;
     }
 }

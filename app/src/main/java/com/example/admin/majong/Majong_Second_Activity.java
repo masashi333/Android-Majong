@@ -32,7 +32,6 @@ public class Majong_Second_Activity extends Activity {
         Intent intent = getIntent();
         // インテントに保存されたデータを取得
         String title = intent.getStringExtra("title");
-
         //データベースアダプターを作成
         dbAdapterSeiseki = new DBAdapter_Seiseki(Majong_Second_Activity.this,title);
         listAdapter = new SeisekiListAdapter();
@@ -49,7 +48,12 @@ public class Majong_Second_Activity extends Activity {
                 .setText("成績詳細")
                 .setTabListener(new TabListener<Seiseki_Syousai_Fragment>(
                         this, "tag1", Seiseki_Syousai_Fragment.class,title)));
-    /*actionBar.addTab(actionBar.newTab()
+
+        actionBar.addTab(actionBar.newTab()
+                .setText("勝ち金")
+                .setTabListener(new TabListener<Seiseki_Win_Money_Fragment>(
+                        this, "tag2", Seiseki_Win_Money_Fragment.class,title)));
+    /*actionBar.addTab(actionBar.newTab())
             .setText("日付⇨日数")
     .setTabListener(new TabListener<SecondTabFragment>(
             this, "tag2", SecondTabFragment.class)));
@@ -73,7 +77,7 @@ public class Majong_Second_Activity extends Activity {
             do {
                 Majong_seiseki seiseki = new Majong_seiseki(
                         c.getInt(c.getColumnIndex(DBAdapter_Seiseki.COL_GAMEID)),
-                        c.getInt(c.getColumnIndex(DBAdapter_Seiseki.COL_MEMBERID)),
+                        c.getString(c.getColumnIndex(DBAdapter_Seiseki.COL_MEMBER)),
                         c.getInt(c.getColumnIndex(DBAdapter_Seiseki.COL_SEISEKI))
                 );
                 seisekiList.add(seiseki);

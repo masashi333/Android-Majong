@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -16,6 +18,10 @@ import java.util.List;
 
 public class CustomAdapter_seiseki_table extends ArrayAdapter<CustomData> {
     private LayoutInflater layoutInflater_;
+    static String name1;
+    static String name2;
+    static String name3;
+
 
     public CustomAdapter_seiseki_table(Context context, int textViewResourceId, List<CustomData> objects) {
         super(context, textViewResourceId, objects);
@@ -36,7 +42,25 @@ public class CustomAdapter_seiseki_table extends ArrayAdapter<CustomData> {
         /*ImageView imageView;
         imageView = (ImageView) convertView.findViewById(R.id.image);
         imageView.setImageBitmap(item.getImageData());*/
-
+        DBAdapter_Seiseki dbAdapterSeiseki = new DBAdapter_Seiseki(getContext(),item.getTextData());
+        //成績表の名前を更新
+        final RelativeLayout relativeLayout = (RelativeLayout) convertView.findViewById(R.id.Relativelayout);
+        TextView textView_name1 = (TextView) relativeLayout.findViewById(R.id.name1);
+        TextView textView_name2 = (TextView) relativeLayout.findViewById(R.id.name2);
+        TextView textView_name3 = (TextView) relativeLayout.findViewById(R.id.name3);
+        dbAdapterSeiseki.open();
+        String sql = "select * from seiseki where gameid=1" ;
+        Cursor c = dbAdapterSeiseki.db.rawQuery(sql, null);
+        c.moveToFirst();
+        name1 =  c.getString(c.getColumnIndex(DBAdapter_Seiseki.COL_MEMBER));
+        textView_name1.setText(name1);
+        c.moveToNext();
+        name2 =  c.getString(c.getColumnIndex(DBAdapter_Seiseki.COL_MEMBER));
+        textView_name2.setText(name2);
+        c.moveToNext();
+        name3 =  c.getString(c.getColumnIndex(DBAdapter_Seiseki.COL_MEMBER));
+        textView_name3.setText(name3);
+        dbAdapterSeiseki.close();
             TextView textView;
             textView = (TextView) convertView.findViewById(R.id.title);
             textView.setText(item.getTextData());

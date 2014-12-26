@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="false"
+    android:id="@+id/ScrollView">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -79,5 +81,51 @@
             </TableRow>
 
         </TableLayout>
-    </LinearLayout>
+        <TextView android:id="@+id/rate"
+            android:layout_width="296dp"
+            android:layout_height="wrap_content"
+            android:text=" レート："
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="120dp"
+            android:layout_marginLeft="50dp" />
+        <TextView android:id="@+id/tip"
+            android:layout_width="296dp"
+            android:layout_height="wrap_content"
+            android:text=" チップ："
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="170dp"
+            android:layout_marginLeft="50dp" />
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/rate_input"
+            android:inputType="number"
+            android:hint="点(デフォルト3)"
+            android:layout_alignTop="@+id/rate"
+            android:layout_alignRight="@+id/tablelayout"
+            android:layout_alignEnd="@+id/tablelayout"
+            android:layout_marginTop="-10dp" />
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tip_input"
+            android:inputType="number"
+            android:hint="1枚あたり(デフォルト50)"
+            android:layout_alignTop="@+id/tip"
+            android:layout_alignRight="@+id/tablelayout"
+            android:layout_alignEnd="@+id/tablelayout"
+            android:layout_marginTop="-10dp" />
+        <Button
+            android:id="@+id/calculate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calculate"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/rate_input"
+            android:layout_alignRight="@+id/tip"
+            android:layout_alignEnd="@+id/tip"
+            android:layout_marginTop="80dp"
+            android:layout_marginRight="20dp" />
+    </RelativeLayout>
 </ScrollView>

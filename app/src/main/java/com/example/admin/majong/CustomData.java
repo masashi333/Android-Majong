@@ -10,6 +10,7 @@ public class CustomData {
     private Bitmap imageData_;
     private String textData_;
     private ArrayAdapter<String> adapter_;
+    private String name[];
 
     public void setAdapter(ArrayAdapter<String> adapter){
         adapter_ = adapter;
@@ -19,6 +20,12 @@ public class CustomData {
        return adapter_;
     }
 
+    public void setNameData(String name[]){
+        this.name = name;
+    }
+    public String[] getNameData(){
+        return name;
+    }
     public void setImagaData(Bitmap image) {
         imageData_ = image;
     }

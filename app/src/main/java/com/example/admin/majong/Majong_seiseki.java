@@ -5,13 +5,13 @@ package com.example.admin.majong;
  */
 public class Majong_seiseki {
     protected int gameid;
-    protected int memberid;
+    protected String member;
     protected int seiseki;
 
 
-    public Majong_seiseki(int gameid, int memberid, int seiseki) {
+    public Majong_seiseki(int gameid, String member, int seiseki) {
         this.gameid = gameid;
-        this.memberid = memberid;
+        this.member = member;
         this.seiseki = seiseki;
     }
 
@@ -19,8 +19,8 @@ public class Majong_seiseki {
         return gameid;
     }
 
-    public int getMemberid() {
-        return memberid;
+    public String getMember() {
+        return member;
     }
 
     public int getSeiseki() {

@@ -44,6 +44,9 @@ public class SeisekiFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
     //private final ArrayAdapter<String> person_array = new ArrayAdapter<String>()
     private int mResourceId;
+    static Spinner spinner1;
+    static Spinner spinner2;
+    static Spinner spinner3;
 
 
     /**
@@ -161,12 +164,15 @@ public class SeisekiFragment extends Fragment {
                 public void onClick(DialogInterface dialog, int which) {
                     // おーけー ボタンクリック処理
                     EditText title = (EditText) layout.findViewById(R.id.edittext);
-                    Spinner spinner1 = (Spinner) listView.getChildAt(0).findViewById(R.id.spinner);
-                    Spinner spinner2 = (Spinner) listView.getChildAt(1).findViewById(R.id.spinner);
-                    Spinner spinner3 = (Spinner) listView.getChildAt(2).findViewById(R.id.spinner);
+                    spinner1 = (Spinner) listView.getChildAt(0).findViewById(R.id.spinner);
+                    spinner2 = (Spinner) listView.getChildAt(1).findViewById(R.id.spinner);
+                    spinner3 = (Spinner) listView.getChildAt(2).findViewById(R.id.spinner);
                     System.out.println("スピナーの選択された名前：" + spinner1.getSelectedItem());
                     System.out.println("スピナーの選択された名前：" + spinner2.getSelectedItem());
                     System.out.println("スピナーの選択された名前：" + spinner3.getSelectedItem());
+                    String name[] = {spinner1.getSelectedItem().toString(),spinner2.getSelectedItem().toString(),spinner3.getSelectedItem().toString()};
+                    //データベースを作成
+                    DBAdapter_Seiseki dbAdapter_seiseki = new DBAdapter_Seiseki(getActivity(),title.getText().toString(),name);
 
 
 
@@ -215,6 +221,7 @@ public class SeisekiFragment extends Fragment {
     public void onStart() {
         super.onStart();
         refreshView();
+
     }
 
 
@@ -291,6 +298,7 @@ public class SeisekiFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), Majong_Second_Activity.class);
                 //　インテントに値をセット
                 intent.putExtra("title", title.getText().toString());
+
                 // 次画面のアクティビティ起動
                 startActivity(intent);
             }
