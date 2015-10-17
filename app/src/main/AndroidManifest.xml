@@ -20,10 +20,6 @@
             android:name="com.example.admin.majong.Majong_Second_Activity"
             android:label="@string/app_name" >
         </activity>
-        <activity
-            android:name="com.example.admin.majong.Majong_Second_Activity2"
-            android:label="@string/title_activity_majong__second__activity2" >
-        </activity>
     </application>
 
 </manifest>

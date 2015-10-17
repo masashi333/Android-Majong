@@ -10,6 +10,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.Calendar;
+
 public class DBAdapter_Seiseki {
 
     static String DATABASE_NAME = "seiseki.db";
@@ -26,16 +28,25 @@ public class DBAdapter_Seiseki {
     protected DatabaseHelper dbHelper;
     protected SQLiteDatabase db;
     protected static String title;
+    protected static String date;
     static String name[];
 
-    public DBAdapter_Seiseki(Context context, String title,String name[]){
+    public DBAdapter_Seiseki(Context context, String title,String date,String name[]){
         this.context = context;
         this.title = title;
+        this.date = date;
         DATABASE_NAME = "seiseki" +title;
         this.name = name;
         for(int i=0;i<=2;i++) {
             System.out.println("メンバー一覧：" + name[i]);
         }
+        dbHelper = new DatabaseHelper(this.context);
+    }
+    public DBAdapter_Seiseki(Context context, String title,String date){
+        this.context = context;
+        this.title = title;
+        this.date = date;
+        DATABASE_NAME = "seiseki" +title;
         dbHelper = new DatabaseHelper(this.context);
     }
     public DBAdapter_Seiseki(Context context, String title){
@@ -44,7 +55,6 @@ public class DBAdapter_Seiseki {
         DATABASE_NAME = "seiseki" +title;
         dbHelper = new DatabaseHelper(this.context);
     }
-
     //
     // SQLiteOpenHelper
     //

@@ -36,7 +36,7 @@ public class Majong_Activity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_majong_);
 
-       /* // Preferencesを初期化する
+/*        // Preferencesを初期化する
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sp.edit();
         Map<String, ?> keys = sp.getAll();

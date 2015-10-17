@@ -42,7 +42,7 @@ public class CustomAdapter_seiseki_table extends ArrayAdapter<CustomData> {
         /*ImageView imageView;
         imageView = (ImageView) convertView.findViewById(R.id.image);
         imageView.setImageBitmap(item.getImageData());*/
-        DBAdapter_Seiseki dbAdapterSeiseki = new DBAdapter_Seiseki(getContext(),item.getTextData());
+        DBAdapter_Seiseki dbAdapterSeiseki = new DBAdapter_Seiseki(getContext(),item.getTextData(),item.getTextData2());
         //成績表の名前を更新
         final RelativeLayout relativeLayout = (RelativeLayout) convertView.findViewById(R.id.Relativelayout);
         TextView textView_name1 = (TextView) relativeLayout.findViewById(R.id.name1);
@@ -62,9 +62,16 @@ public class CustomAdapter_seiseki_table extends ArrayAdapter<CustomData> {
         textView_name3.setText(name3);
         dbAdapterSeiseki.close();
             TextView textView;
+            TextView textView2;
             textView = (TextView) convertView.findViewById(R.id.title);
-            textView.setText(item.getTextData());
-            total_display(convertView,item);
+            textView2 = (TextView) convertView.findViewById(R.id.date);
+
+        textView.setText(item.getTextData());
+        textView2.setText(item.getTextData2());
+        System.out.println("日付");
+        System.out.println(item.getTextData2());
+
+        total_display(convertView,item);
             //テーブルレイアウト作成する関数呼び出し
             //initTableLayout(convertView);
        /* }*/
@@ -96,7 +103,7 @@ public class CustomAdapter_seiseki_table extends ArrayAdapter<CustomData> {
     }*/
     //トータルを表に表示させる
     public void total_display(View convertview, CustomData item){
-        DBAdapter_Seiseki dbAdapterSeiseki = new DBAdapter_Seiseki(getContext(),item.getTextData());
+        DBAdapter_Seiseki dbAdapterSeiseki = new DBAdapter_Seiseki(getContext(),item.getTextData(),item.getTextData2());
         //データベースからデータを取得し、表に反映
         dbAdapterSeiseki.open();
         String sql = "select * from seiseki where gameid=" + 21;

@@ -30,7 +30,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -47,6 +49,8 @@ public class SeisekiFragment extends Fragment {
     static Spinner spinner1;
     static Spinner spinner2;
     static Spinner spinner3;
+    static EditText title;
+    static String date;
 
 
     /**
@@ -163,7 +167,13 @@ public class SeisekiFragment extends Fragment {
             builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // おーけー ボタンクリック処理
-                    EditText title = (EditText) layout.findViewById(R.id.edittext);
+                    title = (EditText) layout.findViewById(R.id.edittext);
+
+                    //現在日時を取得する
+                   Calendar c = Calendar.getInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 E曜日");
+                    date = (sdf.format(c.getTime())).toString();
+                    System.out.println(sdf.format(c.getTime()));
                     spinner1 = (Spinner) listView.getChildAt(0).findViewById(R.id.spinner);
                     spinner2 = (Spinner) listView.getChildAt(1).findViewById(R.id.spinner);
                     spinner3 = (Spinner) listView.getChildAt(2).findViewById(R.id.spinner);
@@ -172,7 +182,7 @@ public class SeisekiFragment extends Fragment {
                     System.out.println("スピナーの選択された名前：" + spinner3.getSelectedItem());
                     String name[] = {spinner1.getSelectedItem().toString(),spinner2.getSelectedItem().toString(),spinner3.getSelectedItem().toString()};
                     //データベースを作成
-                    DBAdapter_Seiseki dbAdapter_seiseki = new DBAdapter_Seiseki(getActivity(),title.getText().toString(),name);
+                    new DBAdapter_Seiseki(getActivity(),title.getText().toString(),date,name);
 
 
 
@@ -184,9 +194,11 @@ public class SeisekiFragment extends Fragment {
                     for (int i = 0; i < 30; i++) {
                         String s = String.valueOf(i);
                         String title_list = "title" + s;
+                        String date_list = "date" + s;
                         if (sp.getString(title_list, "").equals("")) {
                             // putXxxx("キー",データ) にて書き込むデータを登録する
                             editor.putString(title_list, title.getText().toString());
+                            editor.putString(date_list, date.toString());
                             // 書き込みを確定する
                             editor.commit();
                             Toast.makeText(getActivity(), title.getText().toString(), Toast.LENGTH_LONG).show();
@@ -246,10 +258,13 @@ public class SeisekiFragment extends Fragment {
         for (int i = 0; i < 50; i++) {
             String s = String.valueOf(i);
             String title_list = "title" + s;
+            String date_list = "date" + s;
             if (!sp.getString(title_list, "").equals("")) {
                 String title = sp.getString(title_list, "");
+                String date = sp.getString(date_list, "");
                 CustomData item_i = new CustomData();
                 item_i.setTextData(title);
+                item_i.setTextData2(date);
                 objects.add(item_i);
             }
         }
@@ -279,10 +294,13 @@ public class SeisekiFragment extends Fragment {
         for (int i = 0; i < 50; i++) {
             String s = String.valueOf(i);
             String title_list = "title" + s;
+            String date_list = "date" + s;
             if (!sp.getString(title_list, "").equals("")) {
                 String title = sp.getString(title_list, "");
+                String date = sp.getString(date_list, "");
                 CustomData item_i = new CustomData();
                 item_i.setTextData(title);
+                item_i.setTextData2(date);
                 objects.add(item_i);
             }
         }
